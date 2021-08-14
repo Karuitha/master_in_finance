@@ -1,0 +1,176 @@
+---
+title: Master of Finance & Investments
+author: Department of Business & Economics
+date: \today
+params:
+  logo: logo.png
+  cover: cover.png
+  iblue: 008000
+  igray: d4dbde
+documentclass: article
+fontsize: 16
+papersize: a4paper
+output: 
+  IReports::businessReport:
+    keep_tex: TRUE
+    latex_engine: xelatex
+    resetStyleFiles: FALSE
+header-includes: 
+  - \newcommand{\logo}{`r gsub("_", "\\_", params$logo)`}
+  - \newcommand{\cover}{`r gsub("_", "\\_", params$cover)`}
+  - \newcommand{\iblue}{`r params$iblue`}
+  - \newcommand{\igray}{`r params$igray`}
+include-before:
+  - \renewcommand{\contentsname}{Contents}
+  - \renewcommand{\pagename}{Page}
+---
+
+
+
+```{r setup, include = FALSE}
+# packages
+library(tidyverse)
+library(knitr)
+library(xtable)
+library(kableExtra)
+
+# settings
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+\maketitle
+\tableofcontents
+\addcontentsline{toc}{section}{Contents}
+\clearpage
+
+
+\section{INTRODUCTION}
+
+\subsection{Background Information}
+
+Karatina University was established as a full-fledged public university in Kenya through the award of charter on 1st March 2013. Situated 15km North of Karatina town, the university aspires to be one of the leading institutions of higher learning in Kenya and beyond. Karatina University offers quality education that is in tandem with the needs and aspirations of the global village as captured in our vision, mission and core values. The University locality is rich in agriculture soils and endowed with tourism attractions within the vicinity of snow-capped Mount Kenya. The serene environment makes it an ideal place for learning. This institution started in 2007 as Mount Kenya campus of Moi University. It had succeeded a tea training institute. In 2010 it became Karatina University College of Moi University and was chartered to a full-fledged University in 2013. The University has Six Academic Schools namely: School of Agriculture and Biotechnology, School of Business, School of Education and Social Sciences, School of Natural Resources and Environmental Studies, School of Nursing and School of Pure and Applied Sciences.
+
+\section{STATEMENT OF THE FUNDAMENTAL VALUES OF THE UNIVERSITY}
+
+\subsection{Vision}
+
+To be a University of global excellence, meeting the dynamic needs and development of society
+
+\subsection{Mission}
+To conserve, create and disseminate knowledge through, training, research, innovation and community outreach
+
+\subsection{Philosophy of the University}
+Karatina University seek to create network that creates an environment that integrates disparate disciplines to conserve, create and disseminate knowledge that promotes development in a dynamic and developing society passionate in community outreach, research and innovation.  The University shall strive to develop programmes that will nurture leadership skills and innovation in all its graduates as well as enable them interact with the world wide community and contributing towards the development of solutions to a broad range of environmental, economics, entrepreneurial, social and scientific issues. This shall be facilitated by encouraging intellectual rigor that shall respects academic freedom and provide the necessary capacity needed by members of the University.
+
+\subsection{Core Values}
+The core values of the University are:
+
+\begin{center}
+
+Equity
+
+Teamwork
+
+Meritocracy
+
+Academic Freedom
+
+Accountability
+
+Excellence
+
+Probity
+
+\end{center}
+
+
+\section{First Section}
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+
+\subsection{Course Overview}
+
+The Master in Finance & Investments program shall comprise the following courses. 
+
+
+```{r}
+our_courses <- tribble(~ SEM_1, ~ SEM_2, ~ SEM_3, ~ SEM_4, ~ SEM_5,
+        
+        "Intermediate Microeconomics", "Advanced Microeconomics", "Intermediate Macroeconomics", 
+        
+        "Research Project", "Research Project", 
+        
+        "", "", "", "", "",
+        
+        "Introductory Econometrics", "Financial Econometrics", "Asset management and portfolio formation", 
+        
+        "International Finance", "",
+        
+        "", "", "", "", "",
+        
+        "Financial Statements Analysis and Disclosures", "Foundations of Finance", 
+        
+        "Corporate Finance and Corporate Governance", "Banking Operations and Financial Institutions Management", "",
+        
+        "", "", "", "", "",
+        
+        "Mathematical Methods for Quantitative Finance", "Research Methods", 
+        
+        "Emerging Markets and Financial Markets Development", "Derivatives", "") %>% 
+  
+  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance Program") %>% 
+  
+  kable_classic(latex_options = c("hold_position", "striped"), full_width = TRUE)
+
+our_courses
+```
+
+
+
+```{r}
+our_courses <- tribble(~ No, ~ SEM_1, ~ SEM_2, ~ SEM_3, ~ SEM_4,
+        
+        "Year_1", "Intermediate Microeconomics", "Advanced Microeconomics", "Intermediate Macroeconomics", 
+        
+        "Research Project", 
+        
+        "Year_1", "Introductory Econometrics", "Financial Econometrics", "Asset management and portfolio formation", 
+        
+        "International Finance", 
+        
+        "Year_1", "Financial Statements Analysis and Disclosures", "Foundations of Finance", 
+        
+        "Corporate Finance and Corporate Governance", "Banking Operations and Financial Institutions Management",
+        
+        "Year_1", "Mathematical Methods for Quantitative Finance", "Research Methods", 
+        
+        "Emerging Markets and Financial Markets Development", "Derivatives") %>% 
+  
+  pivot_longer(-No, names_to = "Semester", values_to = "Course") %>% 
+  
+  arrange(Semester) %>% 
+  
+  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance Program") %>% 
+  
+  kable_classic(latex_options = c("hold_position", "striped"), full_width = TRUE)
+
+our_courses
+```
+
+\section{Second Section}
+
+```{r results = "asis"}
+tab <- xtable(head(iris, n = 20), align = "|C|C|C|C|C|C|")
+
+addtorow <- list()
+addtorow$pos <- list()
+addtorow$pos[[1]] <- -1
+addtorow$command <- c("\\rowcolor{igray}")
+
+print(tab,
+      include.rownames = FALSE,
+      tabular.environment = "tabularx",
+      width = "\\textwidth",
+      comment = FALSE,
+      add.to.row = addtorow)
+```
+
