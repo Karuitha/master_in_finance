@@ -84,8 +84,14 @@ Probity
 \end{center}
 
 
-\section{First Section}
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+\section{Minimum Admission Requirements}
+
+For admission to the `Master of Finance and Investments` program, the following requirements shall apply: 
+
+1. An undergraduate degree in Finance, Economics, Accounting, Mathematics, Statistics or any related quantitative discipline with a minimum score of second class honours, upper division. 
+
+2. Where condition (1) is not met, the applicant shall provide evidence of at least 2 years work experience in finance and related areas. 
+
 
 \subsection{Course Overview}
 
@@ -93,31 +99,34 @@ The Master in Finance & Investments program shall comprise the following courses
 
 
 ```{r}
-our_courses <- tribble(~ SEM_1, ~ SEM_2, ~ SEM_3, ~ SEM_4, ~ SEM_5,
+our_courses <- tribble(~ SEM_1, ~ SEM_2, ~ SEM_3, ~ SEM_4,
         
-        "Intermediate Microeconomics", "Advanced Microeconomics", "Intermediate Macroeconomics", 
+        "Microeconomics", "Finance Macro-environment Analysis", 
         
-        "Research Project", "Research Project", 
+        "Research Project", "Research Project",
         
-        "", "", "", "", "",
+        "", "", "", "",
+
         
-        "Introductory Econometrics", "Financial Econometrics", "Asset management and portfolio formation", 
+        "Financial Econometrics I", "Financial Econometrics II", "Asset Pricing Theory", "",
         
-        "International Finance", "",
+         "", "", "", "",
         
-        "", "", "", "", "",
-        
-        "Financial Statements Analysis and Disclosures", "Foundations of Finance", 
+        "Financial Statements Analysis and Disclosures",
         
         "Corporate Finance and Corporate Governance", "Banking Operations and Financial Institutions Management", "",
         
-        "", "", "", "", "",
+         "", "", "", "",
         
-        "Mathematical Methods for Quantitative Finance", "Research Methods", 
+        "Mathematical Methods for Finance", 
         
-        "Emerging Markets and Financial Markets Development", "Derivatives", "") %>% 
+        "Financial Economics", "Derivatives", "", 
+        
+         "", "", "", "",
+        
+        "Research Methods", "International Finance", "Elective", "") %>% 
   
-  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance Program") %>% 
+  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance and Investments Program") %>% 
   
   kable_classic(latex_options = c("hold_position", "striped"), full_width = TRUE)
 
@@ -129,27 +138,43 @@ our_courses
 ```{r}
 our_courses <- tribble(~ No, ~ SEM_1, ~ SEM_2, ~ SEM_3, ~ SEM_4,
         
-        "Year_1", "Intermediate Microeconomics", "Advanced Microeconomics", "Intermediate Macroeconomics", 
+        "Year_1", "Microeconomics", "Finance Macro-environment Analysis", 
         
-        "Research Project", 
+        "Research Project", "", 
         
-        "Year_1", "Introductory Econometrics", "Financial Econometrics", "Asset management and portfolio formation", 
+        "Year_1", "Financial Econometrics I", "Financial Econometrics II", "Asset Pricing Theory", "", 
         
-        "International Finance", 
+        "Year_2", "Financial Statements Analysis and Disclosures",
         
-        "Year_1", "Financial Statements Analysis and Disclosures", "Foundations of Finance", 
+        "Corporate Finance and Corporate Governance", "Banking Operations and Financial Institutions Management", "",
         
-        "Corporate Finance and Corporate Governance", "Banking Operations and Financial Institutions Management",
+        "Year_2", "Mathematical Methods for Finance", 
         
-        "Year_1", "Mathematical Methods for Quantitative Finance", "Research Methods", 
+        "Financial Economics", "Derivatives", "", 
         
-        "Emerging Markets and Financial Markets Development", "Derivatives") %>% 
+        "Year_2", "Research Methods", "International Finance", "Elective", "") %>% 
   
   pivot_longer(-No, names_to = "Semester", values_to = "Course") %>% 
   
-  arrange(Semester) %>% 
+  rename(Year = No) %>% 
   
-  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance Program") %>% 
+  arrange(Semester, Year) %>% 
+  
+  filter(Course != "") %>% 
+  
+  select(-Semester, -Year) %>% 
+  
+  mutate(Contact_Hours = case_when(
+    
+    Course == "Research Project" ~ 45,
+    
+    TRUE ~ 3
+    
+  )) %>% 
+  
+  arrange(Contact_Hours, Course) %>% 
+  
+  kbl(., booktabs = TRUE, caption = "Course Structure for the Master of Finance and Investments Program") %>% 
   
   kable_classic(latex_options = c("hold_position", "striped"), full_width = TRUE)
 

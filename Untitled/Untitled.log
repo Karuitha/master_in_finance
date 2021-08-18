@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.3.25)  14 AUG 2021 08:25
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.3.25)  18 AUG 2021 04:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,11 +854,7 @@ File: logo.png Graphic file (type bmp)
 <logo.png>
 [3
 
-]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
+] 
 AED: lastpage setting LastPage
 File: logo.png Graphic file (type bmp)
 <logo.png>
@@ -871,10 +867,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 17452 strings out of 480241
- 376953 string characters out of 5906541
- 697667 words of memory out of 5000000
- 34193 multiletter control sequences out of 15000+600000
+ 17450 strings out of 480241
+ 376933 string characters out of 5906541
+ 694666 words of memory out of 5000000
+ 34191 multiletter control sequences out of 15000+600000
  533066 words of font info for 48 fonts, out of 8000000 for 9000
  1098 hyphenation exceptions out of 8191
  65i,15n,71p,434b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
